@@ -20,9 +20,6 @@
                   {{/foreach}}
                 </li>
               {{/if}}
-              <li class="post-meta-item">
-                <a href="#disqus_thread" data-disqus-identifier="{{comment_id}}">Comments</a>
-              </li>
             </ul>
             <h1 itemprop="name headline" class="post-title"><a href="{{url}}" itemprop="url" data-pjax title="{{{title}}}">{{{title}}}</a></h1>
             {{! A subtitle not available in Ghosts yet }}
@@ -30,16 +27,16 @@
           </header>
           <aside class="post-side">
             <div class="post-author">
-              {{#if author.profile_image}}
-                <a href="{{author.website}}" class="post-author-avatar">
-                  <img src="{{author.profile_image}}" alt="{{author.name}}">
+              {{#if profile_image}}
+                <a href="{{website}}" class="post-author-avatar">
+                  <img src="{{profile_image}}" alt="{{name}}">
                 </a>
               {{/if}}
               <div class="post-author-info">
-                <a href="{{author.website}}" class="post-author-name">
-                  {{author.name}}
+                <a href="{{website}}" class="post-author-name">
+                  {{name}}
                 </a>
-                <p class="post-author-bio">{{author.bio}}</p>
+                <p class="post-author-bio">{{bio}}</p>
               </div>
             </div>
           </aside>
@@ -47,32 +44,34 @@
             {{content}}
           </div>
           <footer class="post-footer">
-            <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
-              {{#if author.profile_image}}
-                <a href="{{author.website}}" class="post-author-avatar">
-                  <img itemprop="image" src="{{author.profile_image}}" alt="{{author.name}}">
-                </a>
-              {{/if}}
-              <div class="post-author-info">
-                <h4 class="post-footer-heading">Written By</h4>
-                <a href="{{author.website}}" itemprop="url" class="post-author-name">
-                  <span itemprop="name">{{author.name}}</span>
-                </a>
-                <p itemprop="description" class="post-author-bio">{{author.bio}}</p>
-                {{#if author.location}}
-                  <p class="post-author-location">{{author.location}}</p>
+            {{#foreach authors}}
+              <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+                {{#if profile_image}}
+                  <a href="{{website}}" class="post-author-avatar">
+                    <img itemprop="image" src="{{profile_image}}" alt="{{name}}">
+                  </a>
                 {{/if}}
-                {{#if author.website}}
-                  <p class="post-author-website">
-                    <a href="{{author.website}}" rel="nofollow">{{author.website}}</a>
+                <div class="post-author-info">
+                  <h4 class="post-footer-heading">Written By</h4>
+                  <a href="{{website}}" itemprop="url" class="post-author-name">
+                    <span itemprop="name">{{name}}</span>
+                  </a>
+                  <p itemprop="description" class="post-author-bio">{{bio}}</p>
+                  {{#if location}}
+                    <p class="post-author-location">{{location}}</p>
+                  {{/if}}
+                  {{#if website}}
+                    <p class="post-author-website">
+                      <a href="{{website}}" rel="nofollow">{{website}}</a>
+                    </p>
+                  {{/if}}
+                  <p class="post-info">
+                    <b class="post-info-title">Published on</b>
+                    <time class="post-date">{{date format='MMMM DD, YYYY'}}</time>
                   </p>
-                {{/if}}
-                <p class="post-info">
-                  <b class="post-info-title">Published on</b>
-                  <time class="post-date">{{date format='MMMM DD, YYYY'}}</time>
-                </p>
+                </div>
               </div>
-            </div>
+            {{/foreach}}
             <div class="post-social">
               <h4 class="post-footer-heading">Spread the word</h4>
               <a href="#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
